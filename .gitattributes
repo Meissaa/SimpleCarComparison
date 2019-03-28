@@ -11,7 +11,7 @@
 # default for csharp files.
 # Note: This is only used by command line
 ###############################################################################
-*.cs linguist-language=C#
+*cs diff=csharp
 *.js linguist-vendored=false
 
 ###############################################################################
