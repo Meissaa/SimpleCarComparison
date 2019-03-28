@@ -1,0 +1,21 @@
+﻿@model IEnumerable<CarComparison.WebApp.Models.CarModel>
+
+@{
+    ViewBag.Title = "VerifyCars";
+}
+
+<h2>Samochód z lepszymi parametrami to: </h2>
+<div class="form-group">
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(model => item.Name)
+            </td>
+        </tr>
+    }
+</div>
+
+<div>
+    @Html.ActionLink("Wróć", "Index", new { @class = "btn btn-warning" })
+</div>

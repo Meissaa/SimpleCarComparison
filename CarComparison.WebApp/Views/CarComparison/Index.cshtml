@@ -1,0 +1,65 @@
+﻿
+@model IList<CarComparison.WebApp.Models.CarModel>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var number = 1;
+}
+<h3>Porównanie aut</h3>
+
+@using (Html.BeginForm("VerifyCars", "CarComparison"))
+{
+    @Html.AntiForgeryToken()
+
+    <div>
+        <h4></h4>
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <table class="table">
+            <tr>
+                <th>
+                    <br />
+                    <div class="control-label col-sm-2">
+                        <div class="form-group" style="padding-top: 12px; ">
+                            @Html.LabelFor(model => model[0].Name)<br />
+                        </div>
+                        <div class="form-group" style="padding-top: 12px;">
+                            @Html.LabelFor(model => model[0].Mileage)<br />
+                        </div>
+                        <div class="form-group" style="padding-top: 12px;">
+                            @Html.LabelFor(model => model[0].Speed)<br />
+                        </div>
+                        <div class="form-group" style="padding-top: 12px;">
+                            @Html.LabelFor(model => model[0].Acceleration)<br />
+                        </div>
+                    </div>
+                </th>
+                @for (int i = 0; i < 2; i++)
+                {
+                <td>
+                    @Html.Label(string.Format("Auto {0}", number++), null, new { @class = "text-info" })<br />
+
+                    @Html.DropDownListFor(model => model[i].Name, (SelectList)ViewBag.CarNames, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model[i].Name, "", new { @class = "text-danger" })<br />
+
+                    @Html.EditorFor(model => model[i].Mileage, new { htmlAttributes = new { @class = "form-control", @type="number", @min = "0", @Value = "0" } })
+                    @Html.ValidationMessageFor(model => model[i].Mileage, "", new { @class = "text-danger" })<br />
+
+                    @Html.EditorFor(model => model[i].Speed, new { htmlAttributes = new { @class = "form-control", @type = "number", @min = "0", @Value = "0" } })
+                    @Html.ValidationMessageFor(model => model[i].Speed, "", new { @class = "text-danger" })<br />
+
+                    @Html.EditorFor(model => model[i].Acceleration, new { htmlAttributes = new { @class = "form-control", @type = "number", @min = "0", @Value = "0" } })
+                    @Html.ValidationMessageFor(model => model[i].Acceleration, "", new { @class = "text-danger" })<br />
+                </td>
+                }
+            </tr>
+        </table>
+        <div class="form-group">
+            <div class="col-md-offset-6 col-md-10">
+                <input type="submit" value="Porównaj" class="btn btn-primary" />
+            </div>
+        </div>
+    </div>
+}
+
+
